@@ -59,13 +59,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotateToFaceDirection(Vector2 direction)
     {
+        float targetAngle = 0;
+
         if (direction == Vector2.up)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            targetAngle = 0;
         else if (direction == Vector2.down)
-            transform.rotation = Quaternion.Euler(0, 0, 180);
+            targetAngle = 180;
         else if (direction == Vector2.left)
-            transform.rotation = Quaternion.Euler(0, 0, 90);
+            targetAngle = 90;
         else if (direction == Vector2.right)
-            transform.rotation = Quaternion.Euler(0, 0, -90);
+            targetAngle = -90;
+
+        if (Mathf.Abs(transform.rotation.eulerAngles.z - targetAngle) > 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, targetAngle);
+        }
     }
 }

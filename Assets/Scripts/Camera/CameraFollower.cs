@@ -14,9 +14,10 @@ public class CameraFollower : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameObject.FindGameObjectWithTag("Player"))
+        if (camerapoint == null)
         {
-            transform.position = Vector2.Lerp(transform.position, camerapoint.position, Time.deltaTime * speed);
+            return;
         }
+        transform.position = Vector2.Lerp(transform.position, camerapoint.position, Time.deltaTime * speed);
     }
 }
