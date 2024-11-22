@@ -8,6 +8,7 @@ public class Enemy1 : MonoBehaviour
     public float speed = 3f;
     private Rigidbody2D rb;
     public float rotateSpeed = 0.0025f;
+    public bool hasVision = false;
 
     private void Start()
     {
@@ -28,7 +29,10 @@ public class Enemy1 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = transform.up * speed;
+        if (hasVision == true)
+        {
+            rb.velocity = transform.up * speed;
+        }
     }
 
     private void FindTarget()
@@ -41,10 +45,13 @@ public class Enemy1 : MonoBehaviour
 
     private void RotateToTarget()
     {
-        Vector2 targetDirection = target.position - transform.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
-        Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
+        if (hasVision == true)
+        {
+            Vector2 targetDirection = target.position - transform.position;
+            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
+            Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
