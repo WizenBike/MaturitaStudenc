@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 250601287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.633542, y: 2.8682523, z: -10}
+  m_LocalPosition: {x: -11.634318, y: 2.8682523, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -593,7 +593,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.633542, y: 2.8682523, z: -10}
+  m_LocalPosition: {x: -11.634318, y: 2.8682523, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -831,6 +831,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &736398560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 736398561}
+  m_Layer: 0
+  m_Name: FiringPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &736398561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736398560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5156836576621407529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &976157692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,9 +1813,9 @@ GameObject:
   - component: {fileID: 3047631071010717305}
   - component: {fileID: 3911600997410198559}
   - component: {fileID: 1506451924468785187}
-  - component: {fileID: 5835873925025154109}
+  - component: {fileID: 5156836576621407530}
   m_Layer: 0
-  m_Name: RangedEnemy
+  m_Name: Enemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1906,9 +1937,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6787857664789379421}
+  - {fileID: 736398561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5835873925025154109
+--- !u!114 &5156836576621407530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1917,13 +1949,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3853396023775269743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b2ac4e38df33824fa0d00a542dae2f4, type: 3}
+  m_Script: {fileID: 11500000, guid: faa24d1d18afa7247a61edd3a302a3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 7
-  rotateSpeed: 0.03
+  speed: 3
+  rotateSpeed: 0.0025
   hasVision: 0
+  distanceToShoot: 8
+  distanceToStop: 3
+  firingPoint: {fileID: 0}
+  fireRate: 0.5
 --- !u!4 &6787857664789379421
 Transform:
   m_ObjectHideFlags: 0

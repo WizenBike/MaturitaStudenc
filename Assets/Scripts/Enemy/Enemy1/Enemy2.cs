@@ -33,7 +33,23 @@ public class Enemy2 : MonoBehaviour
             RotateToTarget();
         }
 
-        //tu pokracuj
+        if (Vector2.Distance(target.position, transform.position) <= distanceToShoot)
+        {
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        if (timeToFire <= 0f)
+        {
+            Debug.Log("shoot");
+            timeToFire = fireRate;
+        }
+        else
+        {
+            timeToFire -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
