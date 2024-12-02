@@ -15,6 +15,7 @@ public class Enemy2 : MonoBehaviour
     public Transform firingPoint;
     public float fireRate;
     private float timeToFire;
+    public GameObject bulletPrefab;
 
     private void Start()
     {
@@ -43,7 +44,7 @@ public class Enemy2 : MonoBehaviour
     {
         if (timeToFire <= 0f)
         {
-            Debug.Log("shoot");
+            Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
             timeToFire = fireRate;
         }
         else
@@ -56,11 +57,14 @@ public class Enemy2 : MonoBehaviour
     {
         if (hasVision == true)
         {
-            if (Vector2.Distance(target.position, transform.position) >= distanceToShoot) 
+            if (Vector2.Distance(target.position, transform.position) >= distanceToStop) 
             {
                 rb.velocity = transform.up * speed;
             }
-                
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
     }
 

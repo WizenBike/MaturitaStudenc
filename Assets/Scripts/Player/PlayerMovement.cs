@@ -75,4 +75,12 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, targetAngle);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
