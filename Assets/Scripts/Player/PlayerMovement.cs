@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = movementInput.normalized * movementSpeed;
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         Instantiate(bulletPrefab, firePosition.position, firePosition.rotation);
     }
