@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     private Vector2 movementInput;
     private Rigidbody2D rb;
+    private bool extralife;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
@@ -75,12 +76,24 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, targetAngle);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("EnemyBullet"))
         {
-            Destroy(gameObject);
+            if (extralife == true)
+            {
+                extralife = false;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Extralife"))
+        {
+            extralife = true; 
+            Destroy(other.gameObject);
         }
     }
 }
