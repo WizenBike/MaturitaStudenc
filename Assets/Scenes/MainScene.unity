@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 9124180}
   m_Layer: 0
   m_Name: Extra-life
-  m_TagString: Untagged
+  m_TagString: Extralife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,7 +272,7 @@ Transform:
   m_GameObject: {fileID: 250601287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.633542, y: 2.8682523, z: -10}
+  m_LocalPosition: {x: -11.634318, y: 2.8682523, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -787,7 +787,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.633542, y: 2.8682523, z: -10}
+  m_LocalPosition: {x: -11.634318, y: 2.8682523, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     private Vector2 movementInput;
     private Rigidbody2D rb;
-    private bool extralife = false;
+    private bool extralife;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = movementInput.normalized * movementSpeed;
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         Instantiate(bulletPrefab, firePosition.position, firePosition.rotation);
     }
@@ -77,29 +77,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        // Handle collision with bullets
         if (other.gameObject.CompareTag("Bullet"))
         {
-            if (extralife)
-            {
-                // If extralife is true, player survives but extralife is set to false
-                extralife = false;
-                Destroy(other.gameObject); // Destroy the bullet
-            }
-            else
-            {
-                // If extralife is false, destroy the player
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
 
-        // Handle collision with Extralife object
         if (other.gameObject.CompareTag("Extralife"))
         {
-            extralife = true; // Set extralife to true
-            Destroy(other.gameObject); // Destroy the Extralife object
+            extralife = true;
+            Destroy(other.gameObject);
         }
     }
 }

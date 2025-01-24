@@ -56,34 +56,15 @@ public class Enemy1 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Only destroy the player if colliding with the main body collider
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject); // Destroy the player
-            target = null; // Clear the target
+            Destroy(other.gameObject);
+            target = null;
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject); // Destroy the enemy
-            Destroy(other.gameObject); // Destroy the bullet
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        // Handle vision detection
-        if (other.gameObject.CompareTag("Player"))
-        {
-            hasVision = true; // Player entered vision
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        // Handle vision loss
-        if (other.gameObject.CompareTag("Player"))
-        {
-            hasVision = false; // Player exited vision
+            Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 }
