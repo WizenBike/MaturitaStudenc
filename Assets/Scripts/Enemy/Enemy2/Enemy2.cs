@@ -34,6 +34,8 @@ public class Enemy2 : MonoBehaviour
             RotateToTarget();
         }
 
+        if (target == null) return;
+
         if (Vector2.Distance(target.position, transform.position) <= distanceToShoot)
         {
             Shoot();
@@ -91,7 +93,6 @@ public class Enemy2 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Enemy2");
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(other.gameObject);

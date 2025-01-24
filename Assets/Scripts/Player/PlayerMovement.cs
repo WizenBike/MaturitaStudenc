@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     private Vector2 movementInput;
     private Rigidbody2D rb;
-    private bool extralife;
+    private int extralife;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
@@ -79,11 +79,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Hrac");
-        if (other.gameObject.CompareTag("EnemyBullet"))
+        if (extralife == 0)
+        {
+            if (other.gameObject.CompareTag("EnemyBullet"))
+            {
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+            }
+        }
+        else
         {
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            extralife = 0;
+        }
+
+        if (other.gameObject.CompareTag("Extralife"))
+        {
+            extralife = 1;
+            Destroy(other.gameObject);
         }
     }
 }
