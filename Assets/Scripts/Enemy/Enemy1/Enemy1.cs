@@ -29,6 +29,7 @@ public class Enemy1 : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (target == null) return;
         if (hasVision == true)
         {
             rb.velocity = transform.up * speed;
@@ -56,6 +57,7 @@ public class Enemy1 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("Enemy1");
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(other.gameObject);

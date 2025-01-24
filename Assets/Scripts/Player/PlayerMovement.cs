@@ -79,15 +79,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        Debug.Log("Hrac");
+        if (other.gameObject.CompareTag("EnemyBullet"))
         {
-            Destroy(gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Extralife"))
-        {
-            extralife = true;
             Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }

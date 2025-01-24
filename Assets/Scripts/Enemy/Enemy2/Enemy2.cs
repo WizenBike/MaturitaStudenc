@@ -55,6 +55,7 @@ public class Enemy2 : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (target == null) return;
         if (hasVision == true)
         {
             if (Vector2.Distance(target.position, transform.position) >= distanceToStop) 
@@ -90,6 +91,7 @@ public class Enemy2 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("Enemy2");
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(other.gameObject);
