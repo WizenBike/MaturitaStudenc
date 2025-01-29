@@ -9,6 +9,8 @@ public class Enemy1 : MonoBehaviour
     private Rigidbody2D rb;
     public float rotateSpeed = 0.0025f;
     public bool hasVision = false;
+    private int chanceToDrop;
+    public GameObject ExtraLife;
 
     private void Start()
     {
@@ -66,6 +68,11 @@ public class Enemy1 : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+            chanceToDrop = Random.Range(0, 10);
+            if (chanceToDrop <= 2)
+            {
+                Instantiate(ExtraLife, transform.position, Quaternion.identity);
+            }
         }
     }
 }

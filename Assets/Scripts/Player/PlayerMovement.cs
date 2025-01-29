@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     private Vector2 movementInput;
     private Rigidbody2D rb;
-    private int extralife;
+    public int extralife;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
@@ -92,11 +92,17 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             extralife = 0;
         }
+    }
 
-        if (other.gameObject.CompareTag("Extralife"))
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (extralife == 0)
         {
-            extralife = 1;
-            Destroy(other.gameObject);
+            if (other.gameObject.CompareTag("Extralife"))
+            {
+                extralife = 1;
+                Destroy(other.gameObject);
+            }
         }
     }
 }

@@ -16,6 +16,8 @@ public class Enemy2 : MonoBehaviour
     public float fireRate;
     private float timeToFire;
     public GameObject bulletPrefab;
+    public GameObject ExtraLife;
+    private int chanceToDrop;
 
     private void Start()
     {
@@ -102,6 +104,11 @@ public class Enemy2 : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+            chanceToDrop = Random.Range(0, 10);
+            if (chanceToDrop <= 2)
+            {
+                Instantiate(ExtraLife, transform.position, Quaternion.identity);
+            }
         }
     }
 }

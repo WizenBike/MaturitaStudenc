@@ -214,6 +214,7 @@ MonoBehaviour:
   firingPoint: {fileID: 3844774345155941927}
   fireRate: 1
   bulletPrefab: {fileID: 1603779822051981552, guid: 7ea9123fb67538243b221f5653aa026e, type: 3}
+  ExtraLife: {fileID: 3600319093320714462, guid: 1ddc9f1f926eb914e8855c24a28dd2b0, type: 3}
 --- !u!1 &3657436181310006229
 GameObject:
   m_ObjectHideFlags: 0

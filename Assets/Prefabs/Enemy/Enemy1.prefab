@@ -289,3 +289,4 @@ MonoBehaviour:
   speed: 7
   rotateSpeed: 0.03
   hasVision: 0
+  ExtraLife: {fileID: 3600319093320714462, guid: 1ddc9f1f926eb914e8855c24a28dd2b0, type: 3}
