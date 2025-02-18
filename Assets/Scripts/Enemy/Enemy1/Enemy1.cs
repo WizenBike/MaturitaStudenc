@@ -7,7 +7,7 @@ public class Enemy1 : MonoBehaviour
     public Transform target;
     public float speed = 3f;
     private Rigidbody2D rb;
-    public float rotateSpeed = 300f; // Zvýšené pre rýchlejšiu rotáciu
+    public float rotateSpeed = 300f;  
     public bool hasVision = false;
     private int chanceToDrop;
     public GameObject ExtraLife;
@@ -15,7 +15,7 @@ public class Enemy1 : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate; // Hladký pohyb
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate; 
         FindTarget();
     }
 
@@ -43,7 +43,7 @@ public class Enemy1 : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player)
         {
-            target = player.transform;
+            target = player.transform;  
         }
     }
 

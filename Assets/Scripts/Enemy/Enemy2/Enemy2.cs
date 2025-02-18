@@ -45,7 +45,7 @@ public class Enemy2 : MonoBehaviour
 
         if (hasVision)
         {
-            RotateToTarget(); // Pôvodné otáèanie nepriate¾a
+            RotateToTarget(); 
 
             float distance = Vector2.Distance(target.position, transform.position);
 
@@ -66,11 +66,9 @@ public class Enemy2 : MonoBehaviour
 
         if (timeToFire <= 0f)
         {
-            // Vytvoríme strelu v smere, ktorý je vždy rovno, a upravíme jej pozíciu z firingPoint
-            Vector2 shootDirection = transform.up; // Strela ide rovno od nepriate¾a
+            Vector2 shootDirection = transform.up; 
             Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
 
-            // Resetujeme èas medzi výstrelmi
             timeToFire = fireRate;
         }
         else
@@ -92,12 +90,10 @@ public class Enemy2 : MonoBehaviour
     {
         if (target == null) return;
 
-        // Vypoèítame uhol k hráèovi
         Vector2 targetDirection = target.position - transform.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f; // Uhol k hráèovi
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f; 
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        // Otáèanie nepriate¾a
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
     }
 

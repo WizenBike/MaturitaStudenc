@@ -16,6 +16,7 @@ public class MoneyCounter : MonoBehaviour
     void Start()
     {
         moneyText.text = "Money: " + currentMoney.ToString();
+        GetComponent<AudioSource>().Play();
     }
 
     public void IncreaseMoney(int v)

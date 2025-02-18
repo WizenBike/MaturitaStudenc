@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bulletPrefab, firePosition.position, firePosition.rotation);
+        GetComponent<AudioSource>().Play();
     }
 
     private void RotateToFaceDirection(Vector2 direction)
