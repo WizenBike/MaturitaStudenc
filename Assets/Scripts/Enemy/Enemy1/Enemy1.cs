@@ -34,7 +34,7 @@ public class Enemy1 : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector2.zero; // Ak nevidí hráèa, stojí
+            rb.velocity = Vector2.zero; 
         }
     }
 
@@ -59,7 +59,7 @@ public class Enemy1 : MonoBehaviour
     private void MoveToTarget()
     {
         Vector2 moveDirection = (target.position - transform.position).normalized;
-        rb.velocity = moveDirection * speed; // Opravené: Už sa nezrých¾uje donekoneèna
+        rb.velocity = moveDirection * speed; 
     }
 
     private void OnCollisionEnter2D(Collision2D other)
