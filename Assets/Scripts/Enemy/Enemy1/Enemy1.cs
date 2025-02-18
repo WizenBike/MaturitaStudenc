@@ -7,7 +7,7 @@ public class Enemy1 : MonoBehaviour
     public Transform target;
     public float speed = 3f;
     private Rigidbody2D rb;
-    public float rotateSpeed = 0.0025f;
+    public float rotateSpeed = 300f; // Zvýšené pre rýchlejšiu rotáciu
     public bool hasVision = false;
     private int chanceToDrop;
     public GameObject ExtraLife;
@@ -15,46 +15,51 @@ public class Enemy1 : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void Update()
-    {
-        if (!target)
-        {
-            FindTarget();
-        }
-        else
-        {
-            RotateToTarget();
-        }
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate; // Hladký pohyb
+        FindTarget();
     }
 
     private void FixedUpdate()
     {
-        if (target == null) return;
-        if (hasVision == true)
+        if (target == null)
         {
-            rb.velocity = transform.up * speed;
+            FindTarget();
+            return;
+        }
+
+        if (hasVision)
+        {
+            RotateToTarget();
+            MoveToTarget();
+        }
+        else
+        {
+            rb.velocity = Vector2.zero; // Ak nevidí hráèa, stojí
         }
     }
 
     private void FindTarget()
     {
-        if (GameObject.FindGameObjectWithTag("Player"))
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player)
         {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            target = player.transform;
         }
     }
 
     private void RotateToTarget()
     {
-        if (hasVision == true)
-        {
-            Vector2 targetDirection = target.position - transform.position;
-            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
-            Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
-        }
+        Vector2 direction = (target.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        float step = rotateSpeed * Time.fixedDeltaTime;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
+    }
+
+    private void MoveToTarget()
+    {
+        Vector2 moveDirection = (target.position - transform.position).normalized;
+        rb.velocity = moveDirection * speed; // Opravené: Už sa nezrých¾uje donekoneèna
     }
 
     private void OnCollisionEnter2D(Collision2D other)

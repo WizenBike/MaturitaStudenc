@@ -208,9 +208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 7
-  rotateSpeed: 0.03
+  rotateSpeed: 0.1
   hasVision: 0
-  distanceToShoot: 8
+  distanceToShoot: 15
   distanceToStop: 5
   firingPoint: {fileID: 3844774345155941927}
   fireRate: 1
@@ -335,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 7132345150524788388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.41, z: 0}
+  m_LocalPosition: {x: 0, y: 1.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

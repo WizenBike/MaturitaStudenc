@@ -1,4 +1,3 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +11,7 @@ public class Enemy2 : MonoBehaviour
     public bool hasVision = false;
     public float distanceToShoot = 5f;
     public float distanceToStop = 3f;
-    public Transform firingPoint;
+    public Transform firingPoint; // Miesto, kde sa strely vyp˙öùaj˙
     public float fireRate;
     private float timeToFire;
     public GameObject bulletPrefab;
@@ -22,21 +21,17 @@ public class Enemy2 : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate; // PlynulejöÌ pohyb
         timeToFire = fireRate;
     }
 
     private void Update()
     {
-        if (!target)
+        if (target == null)
         {
             FindTarget();
+            return;
         }
-        else
-        {
-            RotateToTarget();
-        }
-
-        if (target == null) return;
 
         if (Vector2.Distance(target.position, transform.position) <= distanceToShoot)
         {
@@ -44,27 +39,19 @@ public class Enemy2 : MonoBehaviour
         }
     }
 
-    private void Shoot()
-    {
-        if (timeToFire <= 0f)
-        {
-            Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
-            timeToFire = fireRate;
-        }
-        else
-        {
-            timeToFire -= Time.deltaTime;
-        }
-    }
-
     private void FixedUpdate()
     {
         if (target == null) return;
-        if (hasVision == true)
+
+        if (hasVision)
         {
-            if (Vector2.Distance(target.position, transform.position) >= distanceToStop) 
+            RotateToTarget(); // PÙvodnÈ ot·Ëanie nepriateæa
+
+            float distance = Vector2.Distance(target.position, transform.position);
+
+            if (distance >= distanceToStop)
             {
-                rb.velocity = transform.up * speed;
+                MoveToTarget();
             }
             else
             {
@@ -73,25 +60,54 @@ public class Enemy2 : MonoBehaviour
         }
     }
 
+    private void Shoot()
+    {
+        if (target == null) return;
+
+        if (timeToFire <= 0f)
+        {
+            // VytvorÌme strelu v smere, ktor˝ je vûdy rovno, a upravÌme jej pozÌciu z firingPoint
+            Vector2 shootDirection = transform.up; // Strela ide rovno od nepriateæa
+            Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+
+            // Resetujeme Ëas medzi v˝strelmi
+            timeToFire = fireRate;
+        }
+        else
+        {
+            timeToFire -= Time.deltaTime;
+        }
+    }
+
     private void FindTarget()
     {
-        if (GameObject.FindGameObjectWithTag("Player"))
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            target = player.transform;
         }
     }
 
     private void RotateToTarget()
     {
-        if (hasVision == true)
-        {
-            Vector2 targetDirection = target.position - transform.position;
-            float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
-            Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
-        }
+        if (target == null) return;
+
+        // VypoËÌtame uhol k hr·Ëovi
+        Vector2 targetDirection = target.position - transform.position;
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f; // Uhol k hr·Ëovi
+        Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        // Ot·Ëanie nepriateæa
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
     }
 
+    private void MoveToTarget()
+    {
+        if (target == null) return;
+
+        Vector2 moveDirection = (target.position - (Vector3)rb.position).normalized;
+        rb.velocity = moveDirection * speed;
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
