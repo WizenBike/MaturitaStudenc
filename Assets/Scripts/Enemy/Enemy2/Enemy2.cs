@@ -11,17 +11,22 @@ public class Enemy2 : MonoBehaviour
     public bool hasVision = false;
     public float distanceToShoot = 5f;
     public float distanceToStop = 3f;
-    public Transform firingPoint; // Miesto, kde sa strely vyp˙öùaj˙
+    public Transform firingPoint;
     public float fireRate;
     private float timeToFire;
     public GameObject bulletPrefab;
-    public GameObject ExtraLife;
     private int chanceToDrop;
+    public GameObject Coin;
+    public GameObject Cash;
+    public GameObject ExtraLife;
+    public GameObject SpeedUp;
+    public GameObject DoubleShot;
+    public GameObject QuickerShots;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate; // PlynulejöÌ pohyb
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         timeToFire = fireRate;
     }
 
@@ -45,7 +50,7 @@ public class Enemy2 : MonoBehaviour
 
         if (hasVision)
         {
-            RotateToTarget(); 
+            RotateToTarget();
 
             float distance = Vector2.Distance(target.position, transform.position);
 
@@ -66,7 +71,7 @@ public class Enemy2 : MonoBehaviour
 
         if (timeToFire <= 0f)
         {
-            Vector2 shootDirection = transform.up; 
+            Vector2 shootDirection = transform.up;
             Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
 
             timeToFire = fireRate;
@@ -91,7 +96,7 @@ public class Enemy2 : MonoBehaviour
         if (target == null) return;
 
         Vector2 targetDirection = target.position - transform.position;
-        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f; 
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90f;
         Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, q, rotateSpeed);
@@ -109,17 +114,39 @@ public class Enemy2 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); 
             target = null;
         }
-        else if (other.gameObject.CompareTag("Bullet"))
+        else if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("EnemyBullet"))
         {
-            Destroy(gameObject);
             Destroy(other.gameObject);
-            chanceToDrop = Random.Range(0, 10);
-            if (chanceToDrop <= 2)
+            WaveManager.Instance.EnemyDefeated(gameObject);
+            Destroy(gameObject);
+
+            chanceToDrop = Random.Range(0, 21);
+            if (chanceToDrop <= 10)
+            {
+                Instantiate(Coin, transform.position, Quaternion.identity);
+            }
+            else if (chanceToDrop == 12 || chanceToDrop == 11)
+            {
+                Instantiate(Cash, transform.position, Quaternion.identity);
+            }
+            else if (chanceToDrop == 14 || chanceToDrop == 15)
             {
                 Instantiate(ExtraLife, transform.position, Quaternion.identity);
+            }
+            else if (chanceToDrop == 16 || chanceToDrop == 17)
+            {
+                Instantiate(SpeedUp, transform.position, Quaternion.identity);
+            }
+            else if (chanceToDrop == 18 || chanceToDrop == 19)
+            {
+                Instantiate(DoubleShot, transform.position, Quaternion.identity);
+            }
+            else if (chanceToDrop == 20 || chanceToDrop == 21)
+            {
+                Instantiate(QuickerShots, transform.position, Quaternion.identity);
             }
         }
     }

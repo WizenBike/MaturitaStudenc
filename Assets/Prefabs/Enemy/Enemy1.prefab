@@ -65,9 +65,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.8442917, y: 0.3963318}
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 89.69963
 --- !u!114 &2813626328538386158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2201348555775279685
 MonoBehaviour:
@@ -290,7 +290,13 @@ MonoBehaviour:
   speed: 7
   rotateSpeed: 0.03
   hasVision: 0
+  Coin: {fileID: 1298929437477535317, guid: 471a0a17cdba66d4180063d1489ac03b, type: 3}
+  Cash: {fileID: 1159779893463031429, guid: 26c39b27235e94241984e70fbdec9c2d, type: 3}
   ExtraLife: {fileID: 3600319093320714462, guid: 1ddc9f1f926eb914e8855c24a28dd2b0, type: 3}
+  SpeedUp: {fileID: 5969842969016543122, guid: 2a4f1fc3d5ad28841bda51f8d6d832fe, type: 3}
+  DoubleShot: {fileID: 6903928301899779753, guid: 0cf851be8a554b249881e2eabe787f3d, type: 3}
+  QuickerShots: {fileID: 6086855205929508907, guid: 9d82093ba6d9f7d4abd3bd74c1c20c73, type: 3}
+  mainMenu: MainMenu
 --- !u!114 &1719259910897071865
 MonoBehaviour:
   m_ObjectHideFlags: 0

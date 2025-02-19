@@ -215,7 +215,12 @@ MonoBehaviour:
   firingPoint: {fileID: 3844774345155941927}
   fireRate: 1
   bulletPrefab: {fileID: 1603779822051981552, guid: 7ea9123fb67538243b221f5653aa026e, type: 3}
+  Coin: {fileID: 1298929437477535317, guid: 471a0a17cdba66d4180063d1489ac03b, type: 3}
+  Cash: {fileID: 1159779893463031429, guid: 26c39b27235e94241984e70fbdec9c2d, type: 3}
   ExtraLife: {fileID: 3600319093320714462, guid: 1ddc9f1f926eb914e8855c24a28dd2b0, type: 3}
+  SpeedUp: {fileID: 5969842969016543122, guid: 2a4f1fc3d5ad28841bda51f8d6d832fe, type: 3}
+  DoubleShot: {fileID: 6903928301899779753, guid: 0cf851be8a554b249881e2eabe787f3d, type: 3}
+  QuickerShots: {fileID: 6086855205929508907, guid: 9d82093ba6d9f7d4abd3bd74c1c20c73, type: 3}
 --- !u!114 &2501607883134950470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,9 +299,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1.5394135, y: 0.37688446}
   serializedVersion: 2
-  m_Radius: 30
+  m_Radius: 71.941086
 --- !u!114 &572897232701152532
 MonoBehaviour:
   m_ObjectHideFlags: 0

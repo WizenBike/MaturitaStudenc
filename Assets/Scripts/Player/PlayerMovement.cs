@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
+    private float originalSpeed;
     private Vector2 movementInput;
     private Rigidbody2D rb;
     public int extralife;
+    private bool hasSpeedBoost = false;
+    private bool hasDoubleShot = false;
+    private bool hasQuickerShots = false;
+    private float originalFireRate;
+    [SerializeField] private string mainMenu = "MainMenu";
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
@@ -18,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalSpeed = movementSpeed; 
+        originalFireRate = fireRate; 
     }
 
     void Update()
@@ -56,6 +65,11 @@ public class PlayerMovement : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bulletPrefab, firePosition.position, firePosition.rotation);
+        if (hasDoubleShot)
+        {
+            Vector3 secondBulletPosition = firePosition.position + (firePosition.up * -0.5f);
+            Instantiate(bulletPrefab, secondBulletPosition, firePosition.rotation);
+        }
         GetComponent<AudioSource>().Play();
     }
 
@@ -86,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Destroy(other.gameObject);
                 Destroy(gameObject);
+                SceneManager.LoadScene(mainMenu);
             }
         }
         else
@@ -97,13 +112,59 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (extralife == 0)
+        if (other.gameObject.CompareTag("Extralife"))
         {
-            if (other.gameObject.CompareTag("Extralife"))
+            extralife = 1;
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("SpeedBoost")) 
+        {
+            if (!hasSpeedBoost)
             {
-                extralife = 1;
+                hasSpeedBoost = true;
+                StartCoroutine(SpeedBoostCoroutine());
                 Destroy(other.gameObject);
             }
         }
+        else if (other.gameObject.CompareTag("DoubleShot")) 
+        {
+            if (!hasDoubleShot)
+            {
+                hasDoubleShot = true;
+                StartCoroutine(DoubleShotCoroutine());
+                Destroy(other.gameObject);
+            }
+        }
+        else if (other.gameObject.CompareTag("QuickerShots")) 
+        {
+            if (!hasQuickerShots)
+            {
+                hasQuickerShots = true;
+                StartCoroutine(QuickerShotsCoroutine());
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    private IEnumerator SpeedBoostCoroutine()
+    {
+        movementSpeed *= 2; 
+        yield return new WaitForSeconds(10f);
+        movementSpeed = originalSpeed; 
+        hasSpeedBoost = false;
+    }
+
+    private IEnumerator DoubleShotCoroutine()
+    {
+        yield return new WaitForSeconds(10f); 
+        hasDoubleShot = false;
+    }
+
+    private IEnumerator QuickerShotsCoroutine()
+    {
+        fireRate /= 2; 
+        yield return new WaitForSeconds(10f); 
+        fireRate = originalFireRate; 
+        hasQuickerShots = false;
     }
 }
