@@ -221,6 +221,7 @@ MonoBehaviour:
   SpeedUp: {fileID: 5969842969016543122, guid: 2a4f1fc3d5ad28841bda51f8d6d832fe, type: 3}
   DoubleShot: {fileID: 6903928301899779753, guid: 0cf851be8a554b249881e2eabe787f3d, type: 3}
   QuickerShots: {fileID: 6086855205929508907, guid: 9d82093ba6d9f7d4abd3bd74c1c20c73, type: 3}
+  mainMenu: MainMenu
 --- !u!114 &2501607883134950470
 MonoBehaviour:
   m_ObjectHideFlags: 0

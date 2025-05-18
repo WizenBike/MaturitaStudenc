@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy2 : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Enemy2 : MonoBehaviour
     public GameObject SpeedUp;
     public GameObject DoubleShot;
     public GameObject QuickerShots;
+    [SerializeField] private string mainMenu = "MainMenu";
 
     private void Start()
     {
@@ -116,6 +118,7 @@ public class Enemy2 : MonoBehaviour
         {
             Destroy(other.gameObject); 
             target = null;
+            SceneManager.LoadScene(mainMenu);
         }
         else if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("EnemyBullet"))
         {
